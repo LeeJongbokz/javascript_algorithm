@@ -49,7 +49,7 @@ const rl = readline.createInterface({
 });
 
 const table = [
-  ["D", "B", "A"],
+  ["D", "B", "A"], // a가 1을 냈을 때(가위)
   ["A", "D", "B"], // a가 2를 냈을 때
   ["B", "A", "D"],
 ];

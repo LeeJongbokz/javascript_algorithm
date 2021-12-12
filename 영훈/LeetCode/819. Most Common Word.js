@@ -10,8 +10,6 @@ var mostCommonWord = function(paragraph, banned) {
 
   paragraphArray = changedParagraph.split(' ');
 
-  console.log(paragraphArray);
-
   banned.forEach((ban) => {
     paragraphArray = paragraphArray.filter((el) => el !== ban);
   })

@@ -12,7 +12,7 @@ const rl = readline.createInterface({
 });
 
 let testCount = 0,
-  studentCount = 0,
+  anwser = 0,
   inputs = [];
 const result = new Map();
 
@@ -29,30 +29,28 @@ rl.on("line", function (line) {
     const element = inputs[index];
     // console.log({ element });
     element.forEach((elem, idx) => {
-      const lowerStudents = [];
-      console.log(`${idx}: ${elem}`);
-      if (elem === 4) return;
+      // console.log(`${idx}: ${elem}`);
+      if (idx === 3) return; // 꼴찌는 연산X
       element.forEach((elem2, idx2) => {
-        // console.log(elem, elem2);
-        if (elem < elem2) lowerStudents.push(idx2);
+        if (idx < idx2) {
+          if (result.has(elem)) {
+            const arr = result.get(elem);
+            const count = arr?.[elem2] ? arr[elem2] : 0;
+            result.set(elem, { ...arr, [elem2]: count + 1 });
+            if (index === testCount - 1 && count + 1 === 3) anwser++;
+          } else {
+            result.set(elem, { [elem2]: 1 });
+          }
+        }
       });
-      // console.log(`${idx}: ${lowerStudents}`);
-      // lowerStudents의 length===0이면 맵에 넣지 않는다.
-      // if (lowerStudents.length === 0) return;
-      // // 나머지는 맵에 넣고
-      // if (result.has(idx)) {
-      //   let arr = result.get(idx);
-      //   result.set(idx, [...arr, ...lowerStudents]);
-      // } else {
-      //   result.set(idx, [...lowerStudents]);
-      // }
-      // 포문 다 돈 다음에
-      // 맵에서 3번씩 나오면 그 조합 출력
-
-      // console.log({ result });
     });
   }
 
-  // console.log({ inputs });
+  // console.log({ result });
+  console.log({ anwser });
+  // result.forEach((item) => {
+  //   console.log({ item });
+  // });
+
   process.exit();
 });

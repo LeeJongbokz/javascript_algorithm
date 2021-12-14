@@ -7,7 +7,6 @@ const rl = readline.createInterface({
 
 let count = 0,
   k = 0,
-  anwser = 0,
   inputs = [],
   combs = [];
 

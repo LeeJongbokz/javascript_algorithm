@@ -14,41 +14,23 @@ const a = "11",
 
 //   ! 배열에 담으면 안 됨
 var addBinary = function (a, b) {
+  a = a.split("").reverse().join("");
+  b = b.split("").reverse().join("");
   let leng = a.length > b.length ? a.length : b.length;
-  let answer = "";
-  //   let sum = [...(Number(a) + Number(b)).toString()].map((item) => Number(item));
-  //   console.log(sum);
-  //   return;
-  let add = 0;
-  for (let idx = leng - 1; idx >= 0; idx--) {
-    console.log(a[idx], b[idx]);
-    const num = Number(a[idx] ? a[idx] : 0) + Number(b[idx] ? b[idx] : 0) + add;
-    // const num = Number(a[idx] ? a[idx] : 0) + Number(b[idx] ? b[idx] : 0) + add;
-    add = 0;
+  const answer = [];
+  for (let idx = 0; idx < leng; idx++) {
+    // console.log(a[idx], b[idx]);
+    let num =
+      Number(a[idx] || 0) + Number(b[idx] || 0) + Number(answer[idx] || 0);
 
-    console.log(idx, { num }, num % 2);
     if (num >= 2) {
-      //   sum[idx] = sum[idx] % 2;
-      //   if (sum[idx - 1] || sum[idx - 1] === 0) {
-      //     // sum[idx - 1] = sum[idx - 1] + 1;
-      add = 1;
-      answer = answer + (num % 2);
-      if (idx === 0) {
-        console.log({ num });
-        // idx = 1;
-        // 한 번 더 돌려야 하는데
-        answer = answer + "1";
-      }
-      continue;
-      //   } else {
-      //     add = 0;
-      //     // sum.unshift(1);
-      //   }
-      //   continue;
+      num = num % 2;
+      answer[idx] = num;
+      answer.push(1);
+    } else {
+      answer[idx] = num;
     }
-    answer = answer + (num % 2);
-    // console.log(idx, sum);
   }
-  return answer;
+  return answer.reverse().join("");
 };
 console.log(addBinary(a, b));

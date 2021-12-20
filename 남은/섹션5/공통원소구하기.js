@@ -28,16 +28,9 @@ rl.on("line", function (line) {
   const shortArr = inputA.length < inputB.length ? inputA : inputB;
   const longArr = inputA.length < inputB.length ? inputB : inputA;
 
-  //   const filteredArr = shortArr.filter((item) => {
-  //     return longArr.includes(item) ? item : null;
-  //   });
-
-  //   console.log({ filteredArr });
-  //   shortArr.forE/ach((item) => {
   for (let idx = 0; idx < shortArr.length; idx++) {
     const item = shortArr[idx];
     if (!longArr.includes(item)) continue;
-    // if (longArr.includes(item)) {
     if (answer[answer.length - 1] < item) {
       answer.push(item);
     } else if (answer[0] > item) {
@@ -47,19 +40,16 @@ rl.on("line", function (line) {
         answer.push(item);
         continue;
       }
-      //   console.log({ item });
-      //   console.log({ answer });
+
       let small = answer[answer.length - 1];
       let smallIdx = answer.length - 1;
 
       for (let index = answer.length; index > 0; index--) {
-        // console.log({ index });
         const element = answer[index];
         smallIdx = index;
         small = element;
       }
-      //   console.log({ small });
-      //   console.log({ smallIdx });
+
       answer.splice(smallIdx + 1, 0, item);
     }
   }

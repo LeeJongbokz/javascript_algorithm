@@ -35,15 +35,8 @@ rl.on("line", function (line) {
   }
   //   더 짧은거 기준으로 돌아야 함
   const leng = inputA.length < inputB.length ? countA : countB;
-  //   const leng = inputA.length < inputB.length ? inputA : inputB;
   let idx = 0;
-  //   for (let idx = 0; idx < leng; idx++) {
   while (idx !== leng + 1) {
-    //   while (leng.length !== 0) {
-    // console.log({ answer });
-    // console.log({ inputA });
-    // console.log({ inputB });
-
     const elemA = inputA[idx];
     const elemB = inputB[idx];
     if (idx === 0) {
@@ -82,15 +75,9 @@ rl.on("line", function (line) {
   }
 
   //   for문이 끝나면, 나머지 다 집어넣으면 됨
-  //   inputA.length < inputB.length
-  //     ? (answer = [...answer, ...inputB.splice(0, leng.length)])
-  //     : (answer = [...answer, ...inputA.splice(0, leng.length)]);
-  //   console.log({ inputA });
-  //   console.log({ inputB });
   if (inputA.length === 0) answer.push(...inputB);
   if (inputB.length === 0) answer.push(...inputA);
   console.log({ answer });
-  //   console.log({ countA });
-  //   console.log({ countB });
+
   process.exit();
 });

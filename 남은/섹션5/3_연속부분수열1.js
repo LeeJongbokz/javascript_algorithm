@@ -19,25 +19,26 @@ rl.on("line", function (line) {
   if (input.length === 0) goal = Number(line.split(" ")[1]);
   if (input.length !== 0) rl.close();
 }).on("close", function () {
-  let total = 0;
-  let index = 0;
-  for (let idx = index; idx < input.length; idx++) {
-    const elem = input[idx];
-    total += elem;
-    console.log({ total });
-    console.log({ index });
-    if (total > goal) {
-      index += 1;
-      total = 0;
-      continue;
+  let start = 0;
+  while (start < input.length) {
+    let total = 0;
+
+    for (let index = start; index < input.length; index++) {
+      total += input[index];
+      if (total > goal) {
+        // total = 0;
+        break;
+      }
+      if (total === goal) {
+        answer++;
+        // total = 0;
+        break;
+      }
     }
-    if (total === goal) {
-      index += 1;
-      total = 0;
-      answer++;
-      continue;
-    }
+
+    start++;
   }
+
   console.log({ answer });
   process.exit();
 });

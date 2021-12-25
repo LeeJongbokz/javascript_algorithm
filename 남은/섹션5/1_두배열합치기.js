@@ -36,26 +36,28 @@ rl.on("line", function (line) {
   //   더 짧은거 기준으로 돌아야 함
   const leng = inputA.length < inputB.length ? countA : countB;
   let idx = 0;
-  while (idx !== leng + 1) {
-    const elemA = inputA[idx];
-    const elemB = inputB[idx];
-    if (idx === 0) {
-      if (elemA < elemB) {
-        answer.push(elemA);
-        inputA.splice(0, 1);
-      }
-      if (elemA > elemB) {
-        answer.push(elemB);
-        inputB.splice(0, 1);
-      }
-      if (elemA === elemB) {
-        inputA.splice(0, 1);
-        inputB.splice(0, 1);
-      }
-      idx++;
-      continue;
-    }
 
+  while (idx !== leng + 1) {
+    // const elemA = inputA[idx];
+    // const elemB = inputB[idx];
+    // if (idx === 0) {
+    //   if (elemA < elemB) {
+    //     answer.push(elemA);
+    //     inputA.splice(0, 1);
+    //   }
+    //   if (elemA > elemB) {
+    //     answer.push(elemB);
+    //     inputB.splice(0, 1);
+    //   }
+    //   if (elemA === elemB) {
+    //     inputA.splice(0, 1);
+    //     inputB.splice(0, 1);
+    //   }
+    //   idx++;
+    //   continue;
+    // }
+
+    //////
     if (inputA[0] < inputB[0]) {
       answer.push(inputA[0]);
       inputA.splice(0, 1);

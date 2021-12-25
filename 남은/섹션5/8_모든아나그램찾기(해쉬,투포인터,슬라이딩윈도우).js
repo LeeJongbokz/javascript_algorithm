@@ -58,9 +58,6 @@ rl.on("line", function (line) {
         const numB = anagramsCopied.get(elem);
         anagramsCopied.set(elem, numB - 1);
       }
-      //    else {
-      //     anagramsCopied.set(elem, -1);
-      //   }
 
       // 반복문의 마지막일 때, 알파벳별 갯수가 맞는지(아나그램인지) 확인한다.
       if (index === start + inputB.length - 1) {

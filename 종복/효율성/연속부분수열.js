@@ -2,7 +2,7 @@ function solution(m, arr){
      
     let answer=0, left=0, sum=0;
                 
-    for(let right=0; rt<arr.length; right++){
+    for(let right=0; right<arr.length; right++){
                     
        sum+=arr[right];
        if(sum===m) answer++;

@@ -14,22 +14,26 @@ const s = "AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT";
 
 var findRepeatedDnaSequences = function (s) {
   const letters = ["A", "C", "G", "T"];
+  const standard = 10;
   const answer = [];
 
   const compLetters = [];
-  [...s].forEach((letter, idx) => {
-    if (letters.includes(letter)) {
-      compLetters.push(letter);
+  let start = 0;
+  while (start < s.length) {
+    let count = 0;
 
-      // 10자리면 정답에 푸쉬
-      if (compLetters.length === 10) {
-        answer.push(compLetters.join(""));
-        compLetters.splice(0);
+    for (let index = start; index < s.length; index++) {
+      if (letters.includes(s[index])) {
+        compLetters.push(s[index]);
+        count++;
       }
-    } else {
-      compLetters.splice(0);
+      if (count > standard) {
+        break;
+      }
     }
-  });
+
+    start++;
+  }
 
   return answer;
 };

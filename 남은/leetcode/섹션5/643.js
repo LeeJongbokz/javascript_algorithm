@@ -11,10 +11,54 @@
  * @return {number}
  */
 
-const nums = [1, 12, -5, -6, 50, 3],
-  k = 4;
+// const nums = [1, 12, -5, -6, 50, 3],
+//   k = 4;
+// const nums = [5],
+//   k = 1;
+// const nums = [0],
+// const nums = [-1],
+//   k = 1;
+
+const nums = [9, 7, 3, 5, 6, 2, 0, 8, 1, 9],
+  k = 6;
 
 //   const nums = [5], k = 1
-var findMaxAverage = function (nums, k) {};
+var findMaxAverage = function (nums, k) {
+  let start = 0,
+    big = 0;
+  let total = 0;
+
+  for (let idx = 0; idx < k; idx++) {
+    total += nums[idx];
+    start++;
+  }
+  big = total;
+
+  if (nums.length === k) {
+    return (total / k).toFixed(5);
+  }
+
+  // start = k;
+  // start = k - 1; // 밑에 start++ 때문에
+
+  while (start < nums.length) {
+    // console.log({ start });
+    // console.log(nums[start - k]);
+
+    // 앞에 빼고, 뒤에 더하고
+    total -= nums[start - k];
+    total += nums[start];
+    // console.log({ total });
+
+    if (total > big) {
+      big = total;
+    }
+
+    // if (start !== k) start++;
+    start++;
+  }
+
+  return (big / k).toFixed(5);
+};
 
 console.log(findMaxAverage(nums, k));

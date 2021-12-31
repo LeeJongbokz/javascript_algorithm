@@ -38,23 +38,15 @@ var findMaxAverage = function (nums, k) {
     return (total / k).toFixed(5);
   }
 
-  // start = k;
-  // start = k - 1; // 밑에 start++ 때문에
-
   while (start < nums.length) {
-    // console.log({ start });
-    // console.log(nums[start - k]);
-
     // 앞에 빼고, 뒤에 더하고
     total -= nums[start - k];
     total += nums[start];
-    // console.log({ total });
 
     if (total > big) {
       big = total;
     }
 
-    // if (start !== k) start++;
     start++;
   }
 

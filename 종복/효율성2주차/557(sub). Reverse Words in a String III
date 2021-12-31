@@ -1,0 +1,19 @@
+
+var reverseWords = function(s) {
+    
+    let answer = "";
+    let words = s.split(" ");
+    
+    for(let i=0; i<words.length; i++){
+        words[i] = words[i].split("").reverse().join("");
+    }
+    
+    for(let i=0; i<words.length; i++){
+        answer += words[i];
+        if(i !== words.length-1){
+            answer += " ";
+        }
+    }
+     
+    return answer; 
+};

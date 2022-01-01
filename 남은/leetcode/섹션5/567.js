@@ -46,7 +46,7 @@ var checkInclusion = function (s1, s2) {
   let start = 0;
   let chars = [];
 
-  let answer = false;
+  //   let answer = false;
   for (let idx = 0; idx < s1.length; idx++) {
     // 먼저 해쉬맵 만들기
     const letter = s1[idx];
@@ -58,7 +58,6 @@ var checkInclusion = function (s1, s2) {
     }
     // 카피본 저장
     mapCopy = new Map(matchCheck);
-    console.log({ mapCopy });
 
     // 첫 번째 체크
     chars.push(s2[idx]);
@@ -77,8 +76,6 @@ var checkInclusion = function (s1, s2) {
     // 해쉬맵 원복
     matchCheck = new Map(mapCopy);
 
-    // console.log({ chars });
-    // console.log({ matchCheck });
     for (let idx = 0; idx < chars.length; idx++) {
       const elem = chars[idx];
       if (!matchCheck.get(elem)) {
@@ -90,21 +87,16 @@ var checkInclusion = function (s1, s2) {
         const num = matchCheck.get(elem);
         matchCheck.set(elem, num - 1);
 
-        // console.log({ matchCheck });
         // 모두 0 체크
         if (![...matchCheck.values()].find((item) => item === 0)) answer = true;
       }
     }
 
-    // console.log({ answer });
     if (answer) return answer;
 
     // 슬라이딩
     chars.splice(0, 1);
     chars.push(s2[start]);
-    // }
-
-    // console.log({ matchCheck });
 
     start++;
   }

@@ -13,13 +13,14 @@
  * @return {string[]}
  */
 
-const s = "AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT";
-// const s = "AAAAAAAAAAAAA";
+// const s = "AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT";
+const s = "AAAAAAAAAAAAA";
 
 var findRepeatedDnaSequences = function (s) {
   const letters = ["A", "C", "G", "T"];
   const standard = 10;
-  const answer = [];
+  //   const answer = [];
+  const answer = new Map();
   s = [...s];
 
   const compLetters = [];
@@ -36,42 +37,47 @@ var findRepeatedDnaSequences = function (s) {
     let includeCount = 0;
 
     for (let idx = 0; idx < chars.length; idx++) {
-      //   TODO: 답이 맞으면 인덱스를 쩜프해야 함
       if (letters.includes(chars[idx])) {
         //   compLetters.push(s[index]);
         includeCount++;
       }
     }
 
-    // console.log({ chars });
-    // console.log({ includeCount });
-
     if (includeCount === 10) {
-      answer.push(chars.join(""));
-      // chars = [...s.splice()]
-      while (chars[0] === s[start]) start++;
-      start++;
-      chars.splice(0);
-      //   console.log({ start });
-      for (let idx2 = start; idx2 < start + standard; idx2++) {
-        chars.push(s[idx2]);
+      //   answer.push(chars.join(""));
+      const elem = chars.join("");
+      if (answer.get(elem)) {
+        const num = answer.get(elem);
+        answer.set(elem, num + 1);
+      } else {
+        answer.set(elem, 1);
       }
+      //   console.log({ start });
 
-      //   console.log({ chars });
+      //   while (chars[0] === s[start]) start++;
+      //   start++;
+      //   chars.splice(0);
+      //   for (let idx2 = start; idx2 < start + standard; idx2++) {
+      //     chars.push(s[idx2]);
+      //   }
     }
 
     // if (answer === false) {
     // if (includeCount !== 10) {
-    else {
-      // 슬라이딩
-      chars.splice(0, 1);
-      chars.push(s[start]);
-    }
+    // else {
+    // 슬라이딩
+    chars.splice(0, 1);
+    chars.push(s[start]);
+    // }
 
     start++;
   }
 
-  return answer;
+  for (const [key, value] of answer.entries()) {
+    if (value < 2) answer.delete(key);
+  }
+
+  return [...answer.keys()];
 };
 
 console.log(findRepeatedDnaSequences(s));

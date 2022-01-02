@@ -19,7 +19,6 @@ const s = "AAAAAAAAAAAAA";
 var findRepeatedDnaSequences = function (s) {
   const letters = ["A", "C", "G", "T"];
   const standard = 10;
-  //   const answer = [];
   const answer = new Map();
   s = [...s];
 
@@ -33,18 +32,15 @@ var findRepeatedDnaSequences = function (s) {
     start++;
   }
   while (start < s.length + 1) {
-    // let answer = false;
     let includeCount = 0;
 
     for (let idx = 0; idx < chars.length; idx++) {
       if (letters.includes(chars[idx])) {
-        //   compLetters.push(s[index]);
         includeCount++;
       }
     }
 
     if (includeCount === 10) {
-      //   answer.push(chars.join(""));
       const elem = chars.join("");
       if (answer.get(elem)) {
         const num = answer.get(elem);
@@ -52,23 +48,11 @@ var findRepeatedDnaSequences = function (s) {
       } else {
         answer.set(elem, 1);
       }
-      //   console.log({ start });
-
-      //   while (chars[0] === s[start]) start++;
-      //   start++;
-      //   chars.splice(0);
-      //   for (let idx2 = start; idx2 < start + standard; idx2++) {
-      //     chars.push(s[idx2]);
-      //   }
     }
 
-    // if (answer === false) {
-    // if (includeCount !== 10) {
-    // else {
     // 슬라이딩
     chars.splice(0, 1);
     chars.push(s[start]);
-    // }
 
     start++;
   }

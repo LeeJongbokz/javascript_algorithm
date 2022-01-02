@@ -14,7 +14,6 @@
         if (arr[2] === x) cnt2++;
     }
     
-    let sum = cnt0 + cnt1 + cnt2;
     let index = 0;
     
     while (cnt0 > 0){

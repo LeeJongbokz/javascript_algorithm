@@ -22,7 +22,7 @@ var findRepeatedDnaSequences = function (s) {
   const answer = new Map();
   s = [...s];
 
-  const compLetters = [];
+  // const compLetters = [];
   let start = 0;
   let chars = [];
 
@@ -31,6 +31,7 @@ var findRepeatedDnaSequences = function (s) {
     chars.push(s[idx]);
     start++;
   }
+
   while (start < s.length + 1) {
     let includeCount = 0;
 

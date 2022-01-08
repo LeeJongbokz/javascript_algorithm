@@ -27,11 +27,12 @@ rl.on("line", function (line) {
   //   console.log({ inputs });
   let answer = "YES";
   if (inputs.length % 2 !== 0) answer = "NO";
+
   const count = inputs.length / 2;
   for (let idx = 0; idx < count; idx++) {
     const elemFirst = inputs.shift();
     const elemLast = inputs.pop();
-    if (elemFirst + elemLast !== 0) ranswer = "NO";
+    if (elemFirst + elemLast !== 0) answer = "NO";
   }
 
   if (inputs.length !== 0) answer = "NO";

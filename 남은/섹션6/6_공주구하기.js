@@ -1,0 +1,46 @@
+const readline = require("readline");
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+let start = 0;
+let standard = 0,
+  leng = 0;
+
+const stack = [];
+const inputs = [];
+
+rl.on("line", function (line) {
+  const [lengRaw, standardRaw] = line.split(" ").map((item) => Number(item));
+  leng = lengRaw;
+  standard = standardRaw;
+
+  rl.close();
+}).on("close", function () {
+  // inputs 만들기
+  let i = 0;
+  while (true) {
+    i++;
+    inputs.push(i);
+    if (i === leng) break;
+  }
+
+  //   답 구하기
+  while (true) {
+    const item = inputs.shift();
+    start++;
+
+    if (start === standard) {
+      start = 0;
+    } else {
+      inputs.push(item);
+    }
+
+    if (inputs.length === 1) break;
+  }
+
+  console.log(inputs[0]);
+
+  process.exit();
+});

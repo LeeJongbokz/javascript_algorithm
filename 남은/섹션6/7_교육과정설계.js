@@ -4,7 +4,6 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
-// let answer = "YES";
 let standard = [];
 let inputs = [];
 rl.on("line", function (line) {
@@ -12,7 +11,6 @@ rl.on("line", function (line) {
   if (inputs.length === 0) standard = [...line];
   if (inputs.length !== 0 && standard.length !== 0) rl.close();
 }).on("close", function () {
-  // inputs.forEach((item, idx) => {
   for (let item of inputs) {
     if (standard.includes(item)) {
       const str = standard.shift();

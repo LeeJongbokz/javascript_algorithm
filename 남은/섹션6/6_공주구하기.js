@@ -4,11 +4,9 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
-let start = 0;
 let standard = 0,
   leng = 0;
 
-const stack = [];
 const inputs = [];
 
 rl.on("line", function (line) {
@@ -27,6 +25,7 @@ rl.on("line", function (line) {
   }
 
   //   답 구하기
+  let start = 0;
   while (true) {
     const item = inputs.shift();
     start++;

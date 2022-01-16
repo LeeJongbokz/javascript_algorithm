@@ -1,0 +1,28 @@
+https://ko.javascript.info/map-set
+
+
+맵과 셋  
+
+- 지금까진 아래와 같은 복잡한 자료구조를 학습해 보았음  
+  
+  객체 - 키가 있는 컬렉션을 저장함  
+  배열 - 순서가 있는 컬렉션을 저장함  
+  
+  하지만 현실 세계를 반영하기엔 이 두 자료구조만으론 부족해서 맵(Map)과 셋(Set)이 등장함  
+  
+
+- 맵  
+  
+  맵(Map)은 키가 있는 데이터를 저장한다는 점에서 객체와 유사함  
+  맵은 키에 다양한 자료형을 허용한다는 점에서 차이가 있음  
+  
+  맵에는 다음과 같은 주요 메서드와 프로퍼티가 있음  
+  
+  new Map() - 맵을 만듦  
+  map.set(key, value) - key를 이용해 value를 저장함  
+  map.get(key) - key에 해당하는 값을 반환함. key가 존재하지 않으면 undefined를 반환함  
+  map.has(key) - key가 존재하면 true, 존재하지 않으면 false를 반환함  
+  map.delete(key) - key에 해당하는 값을 삭제함  
+  map.clear() - 맵 안의 모든 요소를 제거함  
+  map.size - 요소의 개수를 반환함  
+  

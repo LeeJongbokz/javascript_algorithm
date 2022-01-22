@@ -15,15 +15,14 @@ const solution = (board, moves) => {
   moves.forEach((elem) => {
     for (let idx = 0; idx < board.length; idx++) {
       const item = board[idx];
-      if (item[elem - 1] !== 0) {
-        // item.splice(idx, 1, 0);
-        const poped = stack.pop();
-        // console.log({ poped });
 
-        if (poped === item[elem - 1]) {
+      if (item[elem - 1] !== 0) {
+        const popped = stack.pop();
+
+        if (popped === item[elem - 1]) {
           answer += 2;
         } else {
-          if (poped) stack.push(poped);
+          if (popped) stack.push(popped);
           stack.push(item[elem - 1]);
         }
         item[elem - 1] = 0;

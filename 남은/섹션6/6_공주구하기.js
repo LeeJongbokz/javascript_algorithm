@@ -24,6 +24,9 @@ rl.on("line", function (line) {
     if (i === leng) break;
   }
 
+  // 2 -> standard
+  // 1 (2) 3 (4) 5 (6) 7 (8)
+
   //   답 구하기
   let start = 0;
   while (true) {

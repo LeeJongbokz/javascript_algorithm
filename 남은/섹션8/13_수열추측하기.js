@@ -15,6 +15,7 @@
 // 4스텝만큼 나눠져야 함
 // 16
 // 8 8//7 9//9 7
+//
 
 const readline = require("readline");
 const rl = readline.createInterface({

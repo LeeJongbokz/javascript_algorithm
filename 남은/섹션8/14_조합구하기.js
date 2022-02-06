@@ -14,16 +14,31 @@ const rl = readline.createInterface({
 });
 
 const answers = [];
-let answer = 0;
+const tempAnswer = [];
 let n, m;
 
-const DFS = (depth, idx) => {};
+const DFS = (depth, num) => {
+  if (depth === m) {
+    answers.push([...tempAnswer]);
+  } else {
+    for (let index = num; index <= n; index++) {
+      tempAnswer[depth] = index;
+      DFS(depth + 1, index + 1);
+    }
+  }
+};
 
 rl.on("line", function (line) {
   const [rawN, rawM] = line.split(" ");
   n = rawN * 1;
   m = rawM * 1;
+  for (let idx = 0; idx < m; idx++) {
+    tempAnswer.push(0);
+  }
+  rl.close();
 }).on("close", function () {
-  console.log({ inputs });
+  DFS(0, 1);
+  console.log(answers.join("\n"));
+  console.log(answers.length);
   process.exit();
 });

@@ -45,6 +45,24 @@ const candies = [5, 6, 4, 10, 10, 1, 1, 2, 2, 2],
 //   ],
 //   k = 46;
 
+var maximumCandies = function (candies, k) {
+  function ok(min_candy) {
+    let count = 0;
+    for (let candy of candies) count += Math.floor(candy / min_candy);
+    return count >= k;
+  }
+
+  let l = 0,
+    h = Math.max(...candies);
+
+  while (l <= h) {
+    let m = l + Math.trunc((h - l) / 2);
+    if (ok(m)) l = m + 1;
+    else h = m - 1;
+  }
+  return h;
+};
+
 // 카운트가 같다고 끝내는 게 아니라, 그 다음 값도 본 다음에 그 다음 값이 미달이면 그 때 전 값을 반환
 
 // 1과 10 사이에서 가장 크게 나눠 줄 수 있는 수를 구해야 함
@@ -68,110 +86,110 @@ const candies = [5, 6, 4, 10, 10, 1, 1, 2, 2, 2],
 // 전 미드랑 값이 1차이 나는데, 그 다음거는 수치 미달이고, 그 전 거는 수치 초과이면 그 전거쓰기
 
 ////////////////
-var maximumCandies = function (candies, k) {
-  let answer = 0;
-  const total = candies.reduce(
-    (previousValue, currentValue) => previousValue + currentValue,
-    0
-  );
-  if (total < k) return answer;
+// var maximumCandies = function (candies, k) {
+//   let answer = 0;
+//   const total = candies.reduce(
+//     (previousValue, currentValue) => previousValue + currentValue,
+//     0
+//   );
+//   if (total < k) return answer;
 
-  candies.sort(function (a, b) {
-    return b - a;
-  });
+//   candies.sort(function (a, b) {
+//     return b - a;
+//   });
 
-  const originalArr = [...candies];
+//   const originalArr = [...candies];
 
-  let small = originalArr[candies.length - 1];
-  let big = originalArr[0];
-  let mid = Math.floor((small + big) / 2);
-  let exMid = 0;
-  let count = 0;
-  let exMidCount = 0;
-  let go = true;
+//   let small = originalArr[candies.length - 1];
+//   let big = originalArr[0];
+//   let mid = Math.floor((small + big) / 2);
+//   let exMid = 0;
+//   let count = 0;
+//   let exMidCount = 0;
+//   let go = true;
 
-  while (go) {
-    candies = [...originalArr];
-    mid = Math.floor((small + big) / 2);
-    // console.log({ small });
-    // console.log({ big });
-    // console.log({ mid });
-    answer = mid;
+//   while (go) {
+//     candies = [...originalArr];
+//     mid = Math.floor((small + big) / 2);
+//     // console.log({ small });
+//     // console.log({ big });
+//     // console.log({ mid });
+//     answer = mid;
 
-    let idx = 0;
-    let totalCount = originalArr.length;
-    // candies.forEach((elem, idx) => {
-    while (idx < totalCount) {
-      const elem = candies[idx];
-      // console.log({ candies });
-      // console.log({ totalCount });
-      // console.log({ elem });
+//     let idx = 0;
+//     let totalCount = originalArr.length;
+//     // candies.forEach((elem, idx) => {
+//     while (idx < totalCount) {
+//       const elem = candies[idx];
+//       // console.log({ candies });
+//       // console.log({ totalCount });
+//       // console.log({ elem });
 
-      if (elem >= mid) {
-        let value = candies.splice(idx, 1);
-        totalCount--;
-        count++;
-        while (value >= mid) {
-          // console.log({ value });
-          value -= mid;
-          candies.unshift(mid); // 얘는 어쩌피 자기 차례에서 카운트에 더해지니까
-          // count++;
-          // if (value >= mid) count++;
-          totalCount++;
-        }
+//       if (elem >= mid) {
+//         let value = candies.splice(idx, 1);
+//         totalCount--;
+//         count++;
+//         while (value >= mid) {
+//           // console.log({ value });
+//           value -= mid;
+//           candies.unshift(mid); // 얘는 어쩌피 자기 차례에서 카운트에 더해지니까
+//           // count++;
+//           // if (value >= mid) count++;
+//           totalCount++;
+//         }
 
-        // console.log({ count });
-        if (value) {
-          candies.push(value);
-          totalCount++;
-        }
-      }
-      idx++;
+//         // console.log({ count });
+//         if (value) {
+//           candies.push(value);
+//           totalCount++;
+//         }
+//       }
+//       idx++;
 
-      // });
-    }
+//       // });
+//     }
 
-    // console.log({ mid });
-    // console.log({ exMid });
-    // console.log({ count });
-    // console.log({ exMidCount });
-    if (count < k) {
-      // count = 0;
+//     // console.log({ mid });
+//     // console.log({ exMid });
+//     // console.log({ count });
+//     // console.log({ exMidCount });
+//     if (count < k) {
+//       // count = 0;
 
-      if (Math.abs(exMid - mid) == 1 && exMidCount >= k && count < k) {
-        answer = exMid;
-        // go = false;
-        return answer;
-      }
+//       if (Math.abs(exMid - mid) == 1 && exMidCount >= k && count < k) {
+//         answer = exMid;
+//         // go = false;
+//         return answer;
+//       }
 
-      big = mid;
-      if (small >= big) small = candies[candies.length - 1];
-      exMid = mid;
-      exMidCount = count;
-      count = 0;
+//       big = mid;
+//       if (small >= big) small = candies[candies.length - 1];
+//       exMid = mid;
+//       exMidCount = count;
+//       count = 0;
 
-      // mid 값을 더 키워야 함
-    } else if (count >= k) {
-      if (Math.abs(exMid - mid) == 1) {
-        if (exMidCount >= k && count <= k) {
-          // console.log("here?");
-          // answer = exMid;
-          // go = false;
-          return answer;
-        }
-        small += 2;
-      } else {
-        small = mid;
-      }
-      // console.log({ small });
-      exMid = mid;
-      exMidCount = count;
-      count = 0;
-    }
-  }
+//       // mid 값을 더 키워야 함
+//     } else if (count >= k) {
+//       if (Math.abs(exMid - mid) == 1) {
+//         if (exMidCount >= k && count <= k) {
+//           // console.log("here?");
+//           // answer = exMid;
+//           // go = false;
+//           return answer;
+//         }
+//         small += 2;
+//       } else {
+//         small = mid;
+//       }
+//       // console.log({ small });
+//       exMid = mid;
+//       exMidCount = count;
+//       count = 0;
+//     }
+//   }
 
-  return answer;
-};
+//   return answer;
+// };
 
 console.log(maximumCandies(candies, k));
 

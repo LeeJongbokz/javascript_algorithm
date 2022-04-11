@@ -25,8 +25,8 @@
 // -> 안 되니까 4+4=8/2=4가 됨
 // 그래서 무한루프
 //
-// const candies = [5, 6, 4, 10, 10, 1, 1, 2, 2, 2],
-//   k = 9;
+const candies = [5, 6, 4, 10, 10, 1, 1, 2, 2, 2],
+  k = 9;
 
 // [3,/3,3,/3/,3,3,3/,3,3,3,]
 // [4/4/4/4,4/4,4]
@@ -34,16 +34,18 @@
 // const candies = [9, 10, 1, 2, 10, 9, 9, 10, 2, 2],
 //   k = 3;
 
-const candies = [
-    750, 253, 391, 342, 151, 655, 934, 601, 870, 338, 866, 798, 806, 795, 580,
-    225, 225, 961, 506, 536, 620, 486, 834, 757, 594, 657, 599, 859, 121, 854,
-    537, 903, 391, 555, 983, 269, 898, 961, 109, 748, 832, 608, 659, 233, 608,
-    476, 564, 599, 989, 875, 229, 193, 725, 921, 836, 534, 769, 277, 639, 628,
-    285, 563, 680, 839, 403, 689, 489, 979, 529, 868, 514, 795, 941, 464, 340,
-    700, 997, 792, 422, 645, 745, 637, 908, 701, 597, 455, 135, 629, 981, 178,
-    551, 595, 993, 896, 700, 507, 997, 884, 852, 928,
-  ],
-  k = 46;
+// const candies = [
+//     750, 253, 391, 342, 151, 655, 934, 601, 870, 338, 866, 798, 806, 795, 580,
+//     225, 225, 961, 506, 536, 620, 486, 834, 757, 594, 657, 599, 859, 121, 854,
+//     537, 903, 391, 555, 983, 269, 898, 961, 109, 748, 832, 608, 659, 233, 608,
+//     476, 564, 599, 989, 875, 229, 193, 725, 921, 836, 534, 769, 277, 639, 628,
+//     285, 563, 680, 839, 403, 689, 489, 979, 529, 868, 514, 795, 941, 464, 340,
+//     700, 997, 792, 422, 645, 745, 637, 908, 701, 597, 455, 135, 629, 981, 178,
+//     551, 595, 993, 896, 700, 507, 997, 884, 852, 928,
+//   ],
+//   k = 46;
+
+// 카운트가 같다고 끝내는 게 아니라, 그 다음 값도 본 다음에 그 다음 값이 미달이면 그 때 전 값을 반환
 
 // 1과 10 사이에서 가장 크게 나눠 줄 수 있는 수를 구해야 함
 // -> 그래서 바이너리 서치를 써야 하는 거임
@@ -86,8 +88,9 @@ var maximumCandies = function (candies, k) {
   let exMid = 0;
   let count = 0;
   let exMidCount = 0;
+  let go = true;
 
-  while (count !== k && mid > 1) {
+  while (go) {
     candies = [...originalArr];
     mid = Math.floor((small + big) / 2);
     // console.log({ small });
@@ -128,35 +131,32 @@ var maximumCandies = function (candies, k) {
       // });
     }
 
-    console.log({ mid });
-    console.log({ exMid });
-    console.log({ count });
-    console.log({ exMidCount });
+    // console.log({ mid });
+    // console.log({ exMid });
+    // console.log({ count });
+    // console.log({ exMidCount });
     if (count < k) {
       // count = 0;
 
-      if (exMid - mid == 1 && exMidCount > k && count < k) {
-        // console.log("here");
+      if (Math.abs(exMid - mid) == 1 && exMidCount >= k && count < k) {
         answer = exMid;
-        // count = k;
+        // go = false;
         return answer;
       }
 
       big = mid;
-      // if (small >= big) small = 1;
-      // if (small >= big && small - 1) small--;
-      // if (exMid - mid === 1) console.log("here");
       if (small >= big) small = candies[candies.length - 1];
-      // console.log({ big });
       exMid = mid;
       exMidCount = count;
       count = 0;
 
       // mid 값을 더 키워야 함
-    } else if (count > k) {
+    } else if (count >= k) {
       if (Math.abs(exMid - mid) == 1) {
-        if (exMidCount > k && count < k) {
-          answer = exMid;
+        if (exMidCount >= k && count <= k) {
+          // console.log("here?");
+          // answer = exMid;
+          // go = false;
           return answer;
         }
         small += 2;

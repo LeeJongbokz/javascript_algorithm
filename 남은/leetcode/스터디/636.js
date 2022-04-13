@@ -86,29 +86,6 @@ var exclusiveTime = function (n, logs) {
   });
 
   console.log({ timeLine });
-  //   return;
-  //   timeLine.forEach((elem, idx) => {
-  // const time = [0, 0,  1, 0];
-  //   let prevVal = -1;
-  //   while (timeLine.length) {
-  //     const elem = timeLine.pop();
-  //     console.log({ elem });
-  //     // return;
-  //     if (prevVal === elem) {
-  //       counts[elem] += 1;
-  //     } else {
-  //       if (counts[elem]) {
-  //         counts[elem] += 1;
-  //       } else {
-  //         counts[elem] = 1;
-  //       }
-  //     }
-
-  //     prevVal = elem;
-  //   }
-  //   //   });
-
-  //   console.log({ counts });
 
   return answer;
 };

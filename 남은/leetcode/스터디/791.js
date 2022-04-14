@@ -14,7 +14,6 @@ const order = "cbafg",
  */
 var customSortString = function (order, s) {
   let answer = [];
-  //   const answer = [];
   order = [...order];
   s = [...s];
 
@@ -27,11 +26,6 @@ var customSortString = function (order, s) {
   });
 
   if (s) answer = [...answer, ...s];
-  //   if (s) {
-  //     s.forEach((element) => {
-  //       answer.push(element);
-  //     });
-  //   }
 
   return answer.join("");
 };

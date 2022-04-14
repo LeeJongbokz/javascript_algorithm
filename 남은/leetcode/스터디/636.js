@@ -1,7 +1,7 @@
 // 636. Exclusive Time of Functions
 // https://leetcode.com/problems/exclusive-time-of-functions/
-const n = 2,
-  logs = ["0:start:0", "1:start:2", "1:end:5", "0:end:6"];
+// const n = 2,
+//   logs = ["0:start:0", "1:start:2", "1:end:5", "0:end:6"];
 // const n = 1,
 //   logs = [
 //     "0:start:0",
@@ -24,44 +24,45 @@ const n = 2,
 // const n = 2;
 // logs = ["0:start:0", "0:start:2", "0:end:5", "1:start:7", "1:end:7", "0:end:8"];
 
-// const starts = [0, 1, 0, 0, 0, 0, 0]; // logs길이만큼 0으로 초기화
-// const ends = [0, 0, 0, 0, 0, 0, 0];
-// const time = [0, 0, 0, 0, 0, 1, 0]; // logs길이만큼 0으로 초기화 -> 카운트 (카운트는 안 됨)
-
-// const  logs = ["0:start:0","1:start:2","1:end:5","0:end:6"]
-// const time = [0, 0, 1, 0, 1, 0];
-// const time = [0, 0, 1, 2, 1, 0]; // indexOF (start 인덱스를 첫 번째로 지정)
-
-// 아니면 fill
-// 노노 스택 사용
-// 꺼내서 키 없으면 넣고 ++
-// 있는 키면 값 ++
-// -> 밸류 ++
-// const answer = {
-//   0: 0,
-//   1: 0,
-// };
-
-// 아니면
-// n개만큼 배열 만들기 -> ㄴㄴ 중간에 껴든애 카운트 하는게 포인트
-// 0: [0,0,0,0,0,0]
-// 1: [0,1,0,0,1,0]
-
-//   const test = {
-//     0: [0, 6],
-//     1: [2, 5],
-//   };
-
-//   const test = {
-//     0: [0, 5],
-//     0: [2, 7],
-//     1: [6, 6],
-//   };
-
-//   const test = {
-//     0: [0, 5,[2, 7]],
-//     1: [6, 6],
-//   };
+const n = 8,
+  logs = [
+    "0:start:0",
+    "1:start:5",
+    "2:start:6",
+    "3:start:9",
+    "4:start:11",
+    "5:start:12",
+    "6:start:14",
+    "7:start:15",
+    "1:start:24",
+    "1:end:29",
+    "7:end:34",
+    "6:end:37",
+    "5:end:39",
+    "4:end:40",
+    "3:end:45",
+    "0:start:49",
+    "0:end:54",
+    "5:start:55",
+    "5:end:59",
+    "4:start:63",
+    "4:end:66",
+    "2:start:69",
+    "2:end:70",
+    "2:start:74",
+    "6:start:78",
+    "0:start:79",
+    "0:end:80",
+    "6:end:85",
+    "1:start:89",
+    "1:end:93",
+    "2:end:96",
+    "2:end:100",
+    "1:end:102",
+    "2:start:105",
+    "2:end:109",
+    "0:end:114",
+  ];
 
 /**
  * @param {number} n
@@ -70,54 +71,48 @@ const n = 2,
  */
 
 var exclusiveTime = function (n, logs) {
-  // const answer = [];
-  // const time = {};
   const counts = {};
 
-  const last = logs[logs.length - 1].split(":")[2] * 1;
-  if (n === 1) return [last + 1];
-  // const timeLine = new Array(last).fill(0);
+  // const last = logs[logs.length - 1].split(":")[2] * 1;
+  // if (n === 1) return [last + 1];
+
   logs.forEach((elem, idx) => {
     const [id, isStart, time] = elem.split(":");
     const [prevId, prevIsStart, prevTime] =
       idx === 0 ? [undefined, undefined, undefined] : logs[idx - 1].split(":");
-    // timeLine[time] = id * 1;
-    // console.log({ elem });
-    // ["0:start:0","1:start:2","1:end:5","0:end:6"]
-    if (isStart === "start") {
-      if (idx !== 0) {
-        // start start
-        if (prevIsStart === "start") {
-          counts[prevId] = counts[prevId]
-            ? counts[prevId] + time * 1 - prevTime * 1
-            : time * 1 - prevTime * 1;
-          // end start
-        } else {
-          if (prevId !== id) {
-            counts[prevId] = counts[prevId]
-              ? counts[prevId] + time * 1 - prevTime * 1 - 1
-              : time * 1 - prevTime * 1 - 1;
-          }
-          // counts[prevId] = counts[prevId]
-          //   ? counts[prevId] + time * 1 - prevTime * 1
-          //   : time * 1 - prevTime * 1;
-        }
-      }
-      // end일 경우
-    } else {
-      // start end
-      if (prevIsStart === "start") {
-        counts[id] = counts[id]
-          ? counts[id] + time * 1 - prevTime * 1 + 1
-          : time * 1 - prevTime * 1 + 1;
-        // end end
+
+    if (idx === 0) return;
+
+    // 다른 아이디일 경우
+    if (id !== prevId) {
+      if (isStart === "start") {
+        const extra = prevIsStart === "start" ? 0 : -1; // start start면 1더하기 end start면 -1더하기
+        counts[prevId] = counts[prevId]
+          ? counts[prevId] + Math.abs(prevTime * 1 - time * 1) + extra
+          : Math.abs(prevTime * 1 - time * 1) + extra;
       } else {
+        const extra = prevIsStart === "start" ? 1 : 0; // start end면 1더하기 end end면 0더하기
         counts[id] = counts[id]
-          ? counts[id] + time * 1 - prevTime * 1
-          : time * 1 - prevTime * 1;
+          ? counts[id] + Math.abs(prevTime * 1 - time * 1) + extra
+          : Math.abs(prevTime * 1 - time * 1) + extra;
+      }
+
+      // 같은 아이디일 경우
+    } else {
+      if (isStart === "start") {
+        const extra = prevIsStart === "start" ? 0 : -1; // start start면 1더하기 end start면 -1더하기
+
+        counts[prevId] = counts[prevId]
+          ? counts[prevId] + Math.abs(prevTime * 1 - time * 1) + extra
+          : Math.abs(prevTime * 1 - time * 1) + extra;
+      } else {
+        const extra = prevIsStart === "start" ? 1 : 0; // start end면 1더하기 end end면 0더하기
+        counts[prevId] = counts[prevId]
+          ? counts[prevId] + Math.abs(prevTime * 1 - time * 1) + extra
+          : Math.abs(prevTime * 1 - time * 1) + extra;
       }
     }
-    // console.log({ counts });
+    console.log({ counts });
   });
 
   return Object.values(counts);

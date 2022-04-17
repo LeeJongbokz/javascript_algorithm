@@ -38,26 +38,6 @@ rl.on("line", function (line) {
   let idx = 0;
 
   while (idx !== leng + 1) {
-    // const elemA = inputA[idx];
-    // const elemB = inputB[idx];
-    // if (idx === 0) {
-    //   if (elemA < elemB) {
-    //     answer.push(elemA);
-    //     inputA.splice(0, 1);
-    //   }
-    //   if (elemA > elemB) {
-    //     answer.push(elemB);
-    //     inputB.splice(0, 1);
-    //   }
-    //   if (elemA === elemB) {
-    //     inputA.splice(0, 1);
-    //     inputB.splice(0, 1);
-    //   }
-    //   idx++;
-    //   continue;
-    // }
-
-    //////
     if (inputA[0] < inputB[0]) {
       answer.push(inputA[0]);
       inputA.splice(0, 1);

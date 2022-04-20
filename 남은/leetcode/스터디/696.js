@@ -1,4 +1,4 @@
-// sliding window????
+// sliding window???? -> 슬라이딩 윈도우가 아니라 투 포인터 알고리즘임
 const s = "00110011";
 /**
  * @param {string} s
@@ -12,6 +12,7 @@ var countBinarySubstrings = function (s) {
   let left = 0;
   let right = 0;
 
+  //TODO: 커뮤니티에서 봤던 거 기억하면서 직접 풀어보기
   while (right < s.length - 1) {
     const elem = s[right];
     // stack.push(elem);

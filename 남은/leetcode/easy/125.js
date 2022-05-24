@@ -17,9 +17,7 @@ var isPalindrome = function (s) {
   s = s.replace(/[\W_]+/g, "").toLowerCase();
   s = [...s];
   const sLest = s.splice(s.length / 2);
-  //   console.log(sLest.length);
   if (sLest.length % 2 === 1 && s.length % 2 === 0) sLest.shift();
-  //   console.log({ s, sLest });
   while (s.length) {
     const first = s.shift();
     const second = sLest.pop();

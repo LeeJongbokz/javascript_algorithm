@@ -48,3 +48,13 @@ var hasCycle = function (head) {
 
 // https://leetcode.com/problems/linked-list-cycle/discuss/2048722/Javascript-or-Maximum-efficiency-or-O(n)-Time-or-O(1)-Space
 // 이 솔류션도 좋다.
+// const hasCycle = (head) => {
+//     while (head) {
+//       if (!head.val) return true;
+
+//       head.val = null;
+//       head = head.next;
+//     }
+
+//     return false;
+//   };
